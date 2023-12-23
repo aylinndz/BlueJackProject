@@ -131,3 +131,47 @@ public boolean myLoop() {
                 }
             }
 
+            if (sumOfCards(playerBoard) > 20) {
+                System.out.println("Player busted.");
+                computerGameWon++;
+                doNotCheck = true;
+                break;
+            } else if (sumOfCards(playerBoard) == 20) {
+                boolean blue = true;
+                for (Card card : playerBoard) {
+                    if (card == null) {
+                        continue;
+                    }
+                    if (!card.getColour().equals("Blue")) {
+                        blue = false;
+                        break;
+                    }
+                }
+                if (blue) {
+                    System.out.println("Player have BlueJack");
+                    playerGameWon += 3;
+                    doNotCheck = true;
+                    break;
+                }
+            }
+        }
+
+        if (computerWantCard) {
+            computerBoard[computerBoardIndex] = gameDeck[gameDeckIndex];
+            gameDeck[gameDeckIndex] = null;
+            gameDeckIndex++;
+            computerBoardIndex++;
+
+            if (lengthBoard(computerBoard)) {
+                if (sumOfCards(computerBoard) <= 20) {
+                    System.out.println("Computer won.");
+                    computerGameWon++;
+                } else {
+                    System.out.println("Computer Busted.");
+                    playerGameWon++;
+                }
+                doNotCheck = true;
+                break;
+            }
+
+
