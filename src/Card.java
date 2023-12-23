@@ -13,5 +13,24 @@ public class Card {
         number = num;
         colour = color;
     }
+    public int getNumber() {
+        if (flipCard) {
+            return 0;
+        }
+        if (doubleCard) {
+            return 0;
+        }
+        return number;
+    }
+
+    public String getColour() {
+        if (flipCard) {
+            return "Flip Card";
+        }
+        if (doubleCard) {
+            return "Double Card";
+        }
+        return colour;
+    }
 
 }
