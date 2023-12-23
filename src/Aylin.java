@@ -78,3 +78,39 @@ public boolean myLoop() {
                 break;
             }
 
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                printBoard();
+                System.out.println("1-End, 2-Stand, 3-Pick Card");
+                String userEntry = scanner.nextLine();
+                int userChoice;
+                try {
+                    userChoice = Integer.parseInt(userEntry);
+                } catch (Exception e) {
+                    System.out.println("Wrong input.");
+                    continue;
+                }
+                if (userChoice == 1) {
+                    break;
+                } else if (userChoice == 2) {
+                    playerWantCard = false;
+                    break;
+                } else {
+                    System.out.println("Enter the index of card you want to play: ");
+                    userEntry = scanner.nextLine();
+                    try {
+                        userChoice = Integer.parseInt(userEntry);
+                    } catch (Exception e) {
+                        System.out.println("Wrong input.");
+                        continue;
+                    }
+                    if (userChoice > 4 || userChoice < 1) {
+                        System.out.println("Wrong input.");
+                        continue;
+                    }
+                    Card card = playerDeck[userChoice - 1];
+                    if (card == null) {
+                        System.out.println("You played that card. Pick another.");
+                        continue;
+                    }
+
