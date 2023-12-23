@@ -113,4 +113,21 @@ public boolean myLoop() {
                         System.out.println("You played that card. Pick another.");
                         continue;
                     }
+                    playerBoard[playerBoardIndex] = card;
+                    playerBoardIndex++;
+                    playerDeck[userChoice - 1] = null;
+
+                    if (lengthBoard(playerBoard)) {
+                        if (sumOfCards(playerBoard) <= 20) {
+                            System.out.println("Player won.");
+                            playerGameWon++;
+                        } else {
+                            System.out.println("Player Busted.");
+                            computerGameWon++;
+                        }
+                        doNotCheck = true;
+                        break;
+                    }
+                }
+            }
 
