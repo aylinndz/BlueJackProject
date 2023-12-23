@@ -42,3 +42,39 @@ public Aylin() {
         writeFile("history.txt", formatFile.toString());
     }
 }
+
+public boolean myLoop() {
+
+    boolean doNotCheck = false;
+
+    boolean playerWantCard = true;
+    boolean computerWantCard = true;
+
+    playerBoard = new Card[9];
+    int playerBoardIndex = 0;
+    computerBoard = new Card[9];
+    int computerBoardIndex = 0;
+
+    while (true) {
+        if (!playerWantCard && !computerWantCard) {
+            break;
+        }
+
+        if (playerWantCard) {
+            playerBoard[playerBoardIndex] = gameDeck[gameDeckIndex];
+            gameDeck[gameDeckIndex] = null;
+            gameDeckIndex++;
+            playerBoardIndex++;
+
+            if (lengthBoard(playerBoard)) {
+                if (sumOfCards(playerBoard) <= 20) {
+                    System.out.println("Player won.");
+                    playerGameWon++;
+                } else {
+                    System.out.println("Player Busted.");
+                    computerGameWon++;
+                }
+                doNotCheck = true;
+                break;
+            }
+
