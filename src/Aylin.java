@@ -350,7 +350,7 @@ private void shuffleCards(Card[] cards) {
     }
 
 
-    private int sumOfCards (Card[]cards){
+    private int sumOfCards(Card[] cards){
         int result = 0;
         for (int i = 0; i < cards.length; i++) {
             Card card = cards[i];
@@ -384,5 +384,70 @@ private void shuffleCards(Card[] cards) {
         }
         return result;
     }
+}
+
+    private void printBoard() {
+        System.out.println();
+        System.out.println("Player: " + playerGameWon);
+        System.out.println("Computer: " + computerGameWon);
+        System.out.println();
+        System.out.print("Computer Hand: ");
+        printCard(computerDeck, false);
+        System.out.print("Computer Board: ");
+        printCard(computerBoard, true);
+
+        System.out.println();
+        System.out.print("Player Board: ");
+        printCard(playerBoard, true);
+        System.out.print("Player Hand: ");
+        printCard(playerDeck, true);
+
+    }
+
+    private void printCard(Card[] cards, boolean show) {
+        for (int i = 0; i < cards.length; i++) {
+            if (!show) {
+                System.out.print((i + 1) + ". X ");
+                continue;
+            }
+            Card card = cards[i];
+            if (card == null) {
+                continue;
+            }
+            System.out.print((i + 1) + ". " + card + " ");
+        }
+        System.out.println();
+
+    }
+
+    private boolean lengthBoard(Card[] board) {
+        for (Card card : board) {
+            if (card == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String readFile(String path) {
+        Scanner reader = null;
+        StringBuilder output = new StringBuilder();
+
+        try {
+            reader = new Scanner(Paths.get(path));
+
+            while (reader.hasNextLine()) {
+                output.append(reader.nextLine()).append("\n");
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return output.toString();
+    }
+
 
 
