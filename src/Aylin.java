@@ -449,5 +449,33 @@ private void shuffleCards(Card[] cards) {
         return output.toString();
     }
 
+    public static void writeFile(String path, String text) {
+        try (Formatter formatter = new Formatter(path)) {
+            formatter.format(text);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public static void appendFile(String path, String text) {
+        Formatter formatter = null;
+        FileWriter fileWriter;
+
+        try {
+            fileWriter = new FileWriter(path, true);
+            formatter = new Formatter(fileWriter);
+            formatter.format(text + "\n");
+            fileWriter.close();
+        } catch(Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (formatter != null) {
+                formatter.close();
+            }
+        }
+    }
+
+}
+
 
 
