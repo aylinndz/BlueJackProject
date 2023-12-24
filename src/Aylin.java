@@ -174,4 +174,71 @@ public boolean myLoop() {
                 break;
             }
 
+            Random random = new Random();
+            while (true) {
+                if (random.nextInt(2) == 0) {
+                    computerWantCard = random.nextBoolean();
+                    break;
+                } else {
+                    int selectCard = random.nextInt(4);
+                    Card card = computerDeck[selectCard];
+                    if (card == null) {
+                        continue;
+                    }
+                    computerBoard[computerBoardIndex] = card;
+                    computerBoardIndex++;
+                    computerDeck[selectCard] = null;
+
+                    if (lengthBoard(computerBoard)) {
+                        if (sumOfCards(computerBoard) <= 20) {
+                            System.out.println("Computer won.");
+                            computerGameWon++;
+                        } else {
+                            System.out.println("Computer Busted.");
+                            playerGameWon++;
+                        }
+                        doNotCheck = true;
+                        break;
+                    }
+                }
+            }
+            if (sumOfCards(computerBoard) > 20) {
+                System.out.println("Computer busted.");
+                doNotCheck = true;
+                playerGameWon++;
+                break;
+            } else if (sumOfCards(computerBoard) == 20) {
+                boolean blue = true;
+                for (Card card : computerBoard) {
+                    if (card == null) {
+                        continue;
+                    }
+                    if (!card.getColour().equals("Blue")) {
+                        blue = false;
+                        break;
+                    }
+                }
+                if (blue) {
+                    System.out.println("Computer have BlueJack");
+                    doNotCheck = true;
+                    computerGameWon += 3;
+                    break;
+                }
+            }
+
+        }
+    }
+
+    if (!doNotCheck) {
+        if (sumOfCards(playerBoard) > sumOfCards(computerBoard)) {
+            System.out.println("Player won.");
+            playerGameWon++;
+        } else if (sumOfCards(playerBoard) < sumOfCards(computerBoard)) {
+            System.out.println("Computer won.");
+            computerGameWon++;
+        } else {
+            System.out.println("Draw.");
+        }
+    }
+
 
