@@ -241,4 +241,40 @@ public boolean myLoop() {
         }
     }
 
+    if (playerGameWon >= 3) {
+        System.out.println("Player took the game.");
+        return false;
+    }
+    if (computerGameWon >= 3) {
+        System.out.println("Computer took the game.");
+        return false;
+    }
+    return true;
+}
+
+
+private void makeDecks(String deckString) {
+    final int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    final String[] colours = {"Blue", "Yellow", "Red", "Green"};
+    switch (deckString) {
+        case "gameDeck" -> {
+            gameDeck = new Card[40];
+            gameDeckIndex = 0;
+            for (int number : numbers) {
+                for (String colour : colours) {
+                    gameDeck[gameDeckIndex] = new Card(number, colour);
+                    gameDeckIndex++;
+                }
+            }
+            gameDeckIndex = 0;
+            shuffleCards(gameDeck);
+        }
+
+
+
+
+
+
+
+
 
