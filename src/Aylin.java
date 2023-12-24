@@ -269,6 +269,77 @@ private void makeDecks(String deckString) {
             gameDeckIndex = 0;
             shuffleCards(gameDeck);
         }
+        case "player" -> {
+            playerDeck = new Card[4];
+
+            Random random = new Random();
+
+            makeDecks("gameDeck");
+            Card[] myCards = new Card[10];
+            myCards[0] = gameDeck[gameDeck.length - 1];
+            myCards[1] = gameDeck[gameDeck.length - 2];
+            myCards[2] = gameDeck[gameDeck.length - 3];
+            myCards[3] = gameDeck[gameDeck.length - 4];
+            myCards[4] = gameDeck[gameDeck.length - 5];
+
+            for (int i = 0; i < 5; i++) {
+                if (i >= 3) {
+                    if (random.nextInt(5) == 1) {
+                        if (random.nextInt(2) == 1) {
+                            myCards[5 + i] = new Card(true, false);
+                        } else {
+                            myCards[5 + i] = new Card(false, true);
+                        }
+                        continue;
+                    }
+                }
+                if (random.nextInt(2) == 0) {
+                    myCards[5 + i] = new Card((random.nextInt(6) + 1) * -1, colours[random.nextInt(4)]);
+                } else {
+                    myCards[5 + i] = new Card((random.nextInt(6) + 1), colours[random.nextInt(4)]);
+                }
+            }
+            shuffleCards(myCards);
+
+            System.arraycopy(myCards, 0, playerDeck, 0, playerDeck.length);
+        }
+        case "computer" -> {
+            computerDeck = new Card[4];
+
+            Random random = new Random();
+
+            makeDecks("gameDeck");
+            Card[] myCards = new Card[10];
+            myCards[0] = gameDeck[0];
+            myCards[1] = gameDeck[1];
+            myCards[2] = gameDeck[2];
+            myCards[3] = gameDeck[3];
+            myCards[4] = gameDeck[4];
+
+            for (int i = 0; i < 5; i++) {
+                if (i >= 3) {
+                    if (random.nextInt(5) == 1) {
+                        if (random.nextInt(2) == 1) {
+                            myCards[5 + i] = new Card(true, false);
+                        } else {
+                            myCards[5 + i] = new Card(false, true);
+                        }
+                        continue;
+                    }
+                }
+                if (random.nextInt(2) == 0) {
+                    myCards[5 + i] = new Card((random.nextInt(6) + 1) * -1, colours[random.nextInt(4)]);
+                } else {
+                    myCards[5 + i] = new Card((random.nextInt(6) + 1), colours[random.nextInt(4)]);
+                }
+            }
+            shuffleCards(myCards);
+
+            System.arraycopy(myCards, 0, computerDeck, 0, computerDeck.length);
+        }
+    }
+}
+
 
 
 
