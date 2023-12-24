@@ -16,7 +16,7 @@ public class Aylin {
     private Card[] playerBoard;
     private Card[] computerDeck;
     private Card[] computerBoard;
-}
+
 
 public Aylin() {
     makeDecks("gameDeck");
@@ -340,12 +340,49 @@ private void makeDecks(String deckString) {
     }
 }
 
+private void shuffleCards(Card[] cards) {
+    Random rnd = new Random();
+    for (int i = cards.length - 1; i > 0; i--) {
+        int i1 = rnd.nextInt(i + 1);
+        Card tempcard = cards[i];
+        cards[i] = cards[i1];
+        cards[i1] = tempcard;
+    }
 
 
-
-
-
-
-
+    private int sumOfCards (Card[]cards){
+        int result = 0;
+        for (int i = 0; i < cards.length; i++) {
+            Card card = cards[i];
+            if (card == null) {
+                continue;
+            }
+            if (card.getColour().equals("Flip Card")) {
+                for (int j = 1; j < 3; j++) {
+                    if (i - j < 0) {
+                        continue;
+                    }
+                    Card beforeCard = cards[i - j];
+                    if (beforeCard.getColour().equals("Flip Card") || beforeCard.getColour().equals("Double Card")) {
+                        continue;
+                    }
+                    result -= beforeCard.getNumber() * 2;
+                }
+            } else if (card.getColour().equals("Double Card")) {
+                for (int j = 1; j < 3; j++) {
+                    if (i - j < 0) {
+                        continue;
+                    }
+                    Card beforeCard = cards[i - j];
+                    if (beforeCard.getColour().equals("Flip Card") || beforeCard.getColour().equals("Double Card")) {
+                        continue;
+                    }
+                    result += beforeCard.getNumber();
+                }
+            }
+            result += card.getNumber();
+        }
+        return result;
+    }
 
 
